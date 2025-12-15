@@ -20,7 +20,7 @@ namespace ZGFueDkx.ZGCLib.Config
 
         public static void SetAdvanced(this ConfigEntryBase entry, bool advanced)
         {
-            if(TryGetAttributes(entry, out var attributes))
+            if (TryGetAttributes(entry, out var attributes))
             {
                 attributes.IsAdvanced = advanced;
             }

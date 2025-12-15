@@ -45,7 +45,7 @@ namespace ZGFueDkx.ZGCLib.Config
                                     GUILayout.Label(cache.Texture, GUILayout.ExpandWidth(false));
                                     string hex = _useHex ? $"#{ColorUtility.ToHtmlStringRGB(color)}" : $"{color.r * 255:F0},{color.g * 255:F0},{color.b * 255:F0}";
                                     string newHex = GUILayout.TextField(hex, GUILayout.ExpandWidth(true));
-                                    if(GUI.changed && newHex != hex && TryParseColor(newHex, out Color c))
+                                    if (GUI.changed && newHex != hex && TryParseColor(newHex, out Color c))
                                     {
                                         color = c;
                                     }
@@ -65,7 +65,7 @@ namespace ZGFueDkx.ZGCLib.Config
                             }
                             GUILayout.EndVertical();
 
-                            if(color != cache.Color)
+                            if (color != cache.Color)
                             {
                                 entry.BoxedValue = color;
 

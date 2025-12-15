@@ -17,7 +17,13 @@ namespace ZGFueDkx.ZGCLib.Config
         public string Name => $"{_originalOrder}. {_name}";
         public int GetNextOrder() => _order--;
 
-        public ConfigEntry<T> BindConfig<T>(string key, T defaultValue, string description, bool hide = false)
+        public ConfigEntry<T> BindConfig<T>(
+            string key,
+            T defaultValue,
+            string description,
+            bool hide = false,
+            AcceptableValueBase? acceptableValue = null
+        )
         {
             ConfigEntry<T> entry = Config.Bind(
                 Name,
@@ -25,7 +31,7 @@ namespace ZGFueDkx.ZGCLib.Config
                 defaultValue,
                 new ConfigDescription(
                     description,
-                    null,
+                    acceptableValue,
                     new ConfigurationManagerAttributes
                     {
                         IsAdvanced = hide,
@@ -34,7 +40,7 @@ namespace ZGFueDkx.ZGCLib.Config
                 )
             );
 
-            configs.Add( entry );
+            configs.Add(entry);
 
             return entry;
         }
@@ -70,12 +76,12 @@ namespace ZGFueDkx.ZGCLib.Config
         {
             foreach (ConfigEntryBase entry in configs)
             {
-                if(predicate is not null && !predicate(entry))
+                if (predicate is not null && !predicate(entry))
                 {
                     continue;
                 }
 
-                entry.SetReadOnly( readOnly );
+                entry.SetReadOnly(readOnly);
             }
         }
 
