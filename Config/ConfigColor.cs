@@ -1,4 +1,4 @@
-﻿using BepInEx.Configuration;
+using BepInEx.Configuration;
 using System.Collections.Generic;
 using UnityEngine;
 using ZGFueDkx.ZGCLib.helpers;
@@ -7,6 +7,15 @@ namespace ZGFueDkx.ZGCLib.Config
 {
     internal static class ConfigColor
     {
+        static ConfigColor()
+        {
+            if (!TomlTypeConverter.CanConvert(typeof(Color)))
+                TomlTypeConverter.AddConverter(typeof(Color), new TypeConverter
+                {
+                    ConvertToString = (value, _) => "#" + ColorUtility.ToHtmlStringRGBA((Color)value),
+                    ConvertToObject = (value, _) => ColorUtils.FromHex(value)
+                });
+        }
         private static readonly Dictionary<ConfigEntryBase, ColorCacheItem> _colorCache = [];
         private static bool _useHex = false;
 

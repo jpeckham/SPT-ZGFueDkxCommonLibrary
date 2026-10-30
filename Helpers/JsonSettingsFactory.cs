@@ -1,4 +1,4 @@
-﻿using BepInEx.Logging;
+using BepInEx.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System;
@@ -15,6 +15,7 @@ namespace ZGFueDkx.ZGCLib.Helpers
             {
                 MissingMemberHandling = MissingMemberHandling.Ignore,
                 NullValueHandling = NullValueHandling.Include,
+                Converters = { new MongoIdConverter() },
                 Error = (sender, args) => HandleError(args, logger)
             };
         }
